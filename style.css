@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    background-color: #ebebeb;
+}
+
+.container {
+    display: block;
+    height: 10vh;
+    width: 25vw;
+    justify-content: center;
+    align-items: center;
+    top: 100px;
+    left: 100px;
+    position: absolute;
+}
+
+.progress-bar-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+}
+
+.default-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.default-node::before {
+    position: absolute;
+    content: "";
+    border-bottom: 2px solid #ccc;
+    width: 100%;
+    top: 20px;
+    left: -50%;
+    z-index: 2;
+}
+
+.default-node::after {
+    position: absolute;
+    content: "";
+    border-bottom: 2px solid #ccc;
+    width: 100%;
+    top: 20px;
+    left: 50%;
+    z-index: 2;
+}
+
+.default-node .node-circle {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ccc;
+    margin-bottom: 6px;
+}
+
+.default-node .node-circle i {
+    z-index: 5;
+}
+
+.default-node .node-text {
+    z-index: 5;
+}
+
+.default-node.active {
+    font-weight: bold;
+}
+
+.default-node.active .node-circle {
+
+    background-color: #ffa743;
+}
+
+.default-node.completed .node-circle {
+    background-color: #4bb543;
+}
+
+.default-node.completed::after {
+    animation: completedLine 1s ease-in-out;
+    -webkit-animation: completedLine 1s ease-in-out;
+    animation-delay: calc(1s * var(--i));
+    animation-fill-mode: forwards;
+    position: absolute;
+    content: "";
+    border-bottom: 2px solid #ccc;
+    width: 100%;
+    top: 20px;
+    left: 50%;
+    z-index: 3;
+}
+
+.default-node:first-child::before {
+    content: none;
+}
+.default-node:last-child::after {
+    content: none;
+}
+
+.default-node .node-circle-info {
+    display: none;
+    position: absolute;
+    width: 80px;
+    height: 130px;
+    background-color: #f1f1f1;
+    left: -20px;
+    top: 40px;
+    opacity: 0;
+}
+
+.default-node .node-circle-info::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100% 0 0 0;
+    background-color: #4bb543;
+    z-index: 1;
+}
+
+.default-node .node-circle-info::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    border-radius: 0 100% 0 0;
+    background-color: #4bb543;
+    z-index: 1;
+}
+
+.default-node:hover .node-circle-info {
+    display: block;
+    animation: appear 0.7s ease-out;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes appear {
+    0%{
+        height: 0px;
+        opacity: 1;
+    }
+    100%{
+        height: 130px;
+        opacity: 1;
+    }
+}
+
+@keyframes completedLine {
+    0%{
+        width: 0;
+        border-color: #4bb543;
+    }
+    100%{
+        width: 100px;
+        border-color: #4bb543;
+    }
+}
