@@ -21,21 +21,22 @@ body {
 
 .progress-bar-container {
     margin-top: auto;
-    display: flex;
+    display: block;
+    position: relative;
     justify-content: space-between;
     margin-bottom: 20px;
     font-family: sans-serif;
 }
 
 .default-node {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     flex: 1;
 }
 
-.default-node::before {
+/*.default-node::before {
     position: absolute;
     content: "";
     border-bottom: 2px solid #ccc;
@@ -53,7 +54,7 @@ body {
     top: 20px;
     left: 50%;
     z-index: 2;
-}
+}*/
 
 .default-node .node-circle {
     position: relative;
@@ -89,7 +90,7 @@ body {
     background-color: #4bb543;
 }
 
-.default-node.completed::after {
+/*.default-node.completed::after {
     animation: completedLine 1s ease-in-out;
     -webkit-animation: completedLine 1s ease-in-out;
     animation-delay: calc(1s * var(--i));
@@ -108,7 +109,7 @@ body {
 }
 .default-node:last-child::after {
     content: none;
-}
+}*/
 
 .default-node .node-circle-info {
     display: none;
@@ -171,4 +172,10 @@ body {
         width: 100px;
         border-color: #4bb543;
     }
+}
+
+.dtc-canvas-path {
+    fill: none;
+    stroke-width: 2;
+    stroke: black;
 }
