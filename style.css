@@ -81,15 +81,6 @@ body {
     font-weight: bold;
 }
 
-.default-node.active .node-circle {
-
-    background-color: #ffa743;
-}
-
-.default-node.completed .node-circle {
-    background-color: #4bb543;
-}
-
 /*.default-node.completed::after {
     animation: completedLine 1s ease-in-out;
     -webkit-animation: completedLine 1s ease-in-out;

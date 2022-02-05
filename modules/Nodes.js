@@ -5,11 +5,12 @@ export class DefaultNode {
      * @param props information about the node
      * @param props.innerText Nodes innerText
      * @param props.outerText Nodes outerText
-     * @param props.parent Nodes parent element
+     * @param props.parentNode Nodes parent element
      * @param props.isCompleted
      * @param props.isActive
+     * @param props.isFailed
      * @param props.number
-     * @param props.progressBar
+     * @param props.progressBar ProgressBar
      * @param props.position
      * @param props.position.left
      * @param props.position.top
@@ -18,9 +19,10 @@ export class DefaultNode {
         this.progressBar = props.progressBar;
         this.innerText = props.innerText;
         this.outerText = this.progressBar.style.showOuterText ? props.outerText : '';
-        this.parent = props.parent;
+        this.parentNode = props.parentNode;
         this.isCompleted = props.isCompleted;
         this.isActive = props.isActive;
+        this.isFailed = props.isFailed;
         this.number = props.number || 0;
         this.position = props.position;
 
@@ -36,6 +38,14 @@ export class DefaultNode {
 
         this.circle = document.createElement('div');
         this.circle.className = 'node-circle';
+        if(this.isCompleted){
+            this.circle.style.backgroundColor = this.progressBar.style.nodeCompletedColor
+        }else if(this.isActive){
+            this.circle.style.backgroundColor = this.progressBar.style.nodeActiveColor
+        }else{
+            this.circle.style.backgroundColor = this.progressBar.style.nodeColor
+        }
+
         //this.circle.innerText = this.innerText || '';
 
         this.text = document.createElement('div');
@@ -54,6 +64,9 @@ export class DefaultNode {
         if (this.isCompleted === true){
             this.setCompleted()
         }
+        if (this.isFailed === true){
+            this.setFailed();
+        }
 
         this.circle.appendChild(this.nodeCircleInfo);
 
@@ -66,53 +79,63 @@ export class DefaultNode {
     }
 
     setActive(){
-        this.node.classList.add('active');
+        this.circle.style.backgroundColor = this.progressBar.style.nodeActiveColor;
         this.circle.innerHTML = '<i class="fa fa-clock" aria-hidden="true"></i>';
     }
 
     setInactive(){
-        this.node.classList.remove('active');
+        this.circle.style.backgroundColor = this.progressBar.style.nodeColor;
         this.circle.innerHTML = '';
 
     }
 
     setCompleted(){
-        this.node.classList.add('completed');
+        this.circle.style.backgroundColor = this.progressBar.style.nodeCompletedColor;
         this.circle.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
     }
 
     setInCompleted(){
-        this.node.classList.remove('completed');
+        this.circle.style.backgroundColor = this.progressBar.style.nodeColor;
+        this.circle.innerHTML = '';
+    }
+
+    setFailed(){
+        this.circle.style.backgroundColor = this.progressBar.style.nodeFailedColor;
+        this.circle.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+    }
+
+    setUnfailed(){
+        this.circle.style.backgroundColor = this.progressBar.style.nodeColor;
         this.circle.innerHTML = '';
     }
 
     drawConnectingLine(){
-        const parentNode = this.progressBar.nodeMap.get(this.parent);
+        const parentNode = this.progressBar.nodeMap.get(this.parentNode);
         if(parentNode) {
             const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             const topDifference = this.position.top - parentNode.position.top;
             if(topDifference === 0) {
                 svg.style.cssText = `
                     position: absolute;
-                    width: 100px;
-                    height: 100px;
+                    width: ${this.progressBar.style.nodeDistanceX}px;
+                    height: ${this.progressBar.style.nodeDistanceY}px;
                     top: 20px;
-                    left: -80px;
+                    left: ${-this.progressBar.style.nodeDistanceX + 20}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
-                    d: 'M0,0 L100,0',
+                    d: `M0,1 L${this.progressBar.style.nodeDistanceX},1`,
                     class: 'dtc-canvas-path'
                 }));
             }else{
                 svg.style.cssText = `
                     position: absolute;
-                    width: 100px;
+                    width: ${this.progressBar.style.nodeDistanceX}px;
                     height: ${topDifference + 100}px;
                     top: ${20 - topDifference}px;
-                    left: -80px;
+                    left: ${-this.progressBar.style.nodeDistanceX + 20}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
-                    d: `M 0 0 Q 50 0 50 15 L 50 ${topDifference - 15} Q 50 ${topDifference} 100 ${topDifference}`,
+                    d: `M 0 0 Q ${this.progressBar.style.nodeDistanceX / 2} 0 ${this.progressBar.style.nodeDistanceX / 2} 15 L ${this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} Q ${this.progressBar.style.nodeDistanceX / 2} ${topDifference} ${this.progressBar.style.nodeDistanceX} ${topDifference}`,
                     class: 'dtc-canvas-path'
                 }));
             }

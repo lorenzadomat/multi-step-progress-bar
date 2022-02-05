@@ -1,4 +1,5 @@
 import { DefaultNode } from "./Nodes.js";
+import { DefaultStyle } from "./DefaultStyle.js";
 
 
 export default class ProgressBar {
@@ -10,7 +11,7 @@ export default class ProgressBar {
 
         this.parent = props.parent;
         this.initialNodes = props.initialNodes;
-        this.style = props.style;
+        this.style = Object.assign(DefaultStyle, props.style);
 
 
 
@@ -30,7 +31,7 @@ export default class ProgressBar {
 
     /**
      *
-     * @param {{id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, number: number, isBeginningNode: boolean, parent: string}} nodeDefinition
+     * @param {{id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, isFailed: boolean, number: number, isBeginningNode: boolean, parentNode: string}} nodeDefinition
      */
     addNode(nodeDefinition){
         const {top, left} = this.calculatePosition(nodeDefinition)
@@ -38,10 +39,11 @@ export default class ProgressBar {
             id: nodeDefinition.id,
             innerText: nodeDefinition.innerText,
             outerText: nodeDefinition.outerText,
-            parent: nodeDefinition.parent,
+            parentNode: nodeDefinition.parentNode,
             progressBar: this,
             isActive: nodeDefinition.isActive || false,
             isCompleted: nodeDefinition.isCompleted || false,
+            isFailed: nodeDefinition.isFailed || false,
             number: nodeDefinition.number || 0,
             position: {
                 top,
@@ -60,28 +62,28 @@ export default class ProgressBar {
 
     /**
      *
-     * @param {{id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, number: number, isBeginningNode: boolean, parent: string}} nodeDefinition
+     * @param {{id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, number: number, isBeginningNode: boolean, parentNode: string}} nodeDefinition
      */
     calculatePosition(nodeDefinition){
         let top = 0;
         let left = 0;
         if(nodeDefinition.isBeginningNode){
             const beginningNodeLength = this.beginningNodes.length;
-            top = beginningNodeLength * 100;
-        }else if(nodeDefinition.parent){
-            const parentNode = this.nodeMap.get(nodeDefinition.parent);
+            top = beginningNodeLength * this.style.nodeDistanceY;
+        }else if(nodeDefinition.parentNode){
+            const parentNode = this.nodeMap.get(nodeDefinition.parentNode);
             if(parentNode){
-                top = parentNode.position.top + (parentNode.childNodes.length * 100);
-                left = parentNode.position.left + 100;
+                top = parentNode.position.top + (parentNode.childNodes.length * this.style.nodeDistanceY);
+                left = parentNode.position.left + this.style.nodeDistanceX;
                 parentNode.addChildNode(nodeDefinition.id);
             }else{
                 const beginningNodeLength = this.beginningNodes.length;
-                top = beginningNodeLength * 100;
+                top = beginningNodeLength * this.style.nodeDistanceY;
                 nodeDefinition.isBeginningNode = true;
             }
         }else{
             const beginningNodeLength = this.beginningNodes.length;
-            top = beginningNodeLength * 100;
+            top = beginningNodeLength * this.style.nodeDistanceY;
             nodeDefinition.isBeginningNode = true;
         }
 
