@@ -89,6 +89,7 @@ The progress bar style can be adapted by using one of the following properties i
 
 - Loading Animation
 - Node Details on Hover/Click
+- makes line smoother
 
 
 For any further ideas pleas write an E-Mail to <a href="mailto:l.adomat@reply.de">l.adomat@reply.de</a> or create a pull request.
