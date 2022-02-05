@@ -112,7 +112,7 @@ export class DefaultNode {
                     left: -80px;
                 `;
                 svg.appendChild(createSVGElement('path', {
-                    d: `M 0 0 Q 50 0 50 15 L 50 ${topDifference - 15} Q 50 ${topDifference} ${topDifference} ${topDifference}`,
+                    d: `M 0 0 Q 50 0 50 15 L 50 ${topDifference - 15} Q 50 ${topDifference} 100 ${topDifference}`,
                     class: 'dtc-canvas-path'
                 }));
             }

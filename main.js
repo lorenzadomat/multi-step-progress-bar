@@ -1,9 +1,8 @@
 import ProgressBar from './modules/ProgressBar.js';
 
 
-const container = document.getElementById('container');
 const progressBar = new ProgressBar({
-    parent: container,
+    parent: document.getElementById('container'),
     style: {
         showOuterText: false
     },
@@ -61,6 +60,18 @@ const progressBar = new ProgressBar({
             innerText: '4',
             outerText: 'fourth',
             parent: '6'
+        },
+        {
+            id: '9',
+            innerText: '4',
+            outerText: 'fourth',
+            parent: '4'
+        },
+        {
+            id: '10',
+            innerText: '4',
+            outerText: 'fourth',
+            parent: '5'
         }
     ]
 });
