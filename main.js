@@ -1,13 +1,13 @@
 import ProgressBar from './modules/ProgressBar.js';
 
 
-const progressBar = new ProgressBar({
+new ProgressBar({
     parent: document.getElementById('container'),
     style: {
-        showOuterText: false,
+        showOuterText: true,
         nodeSize: 20,
-        nodeDistanceX: 140,
-        nodeDistanceY: 75,
+        nodeDistanceX: 100,
+        nodeDistanceY: 100,
         nodeColor: '#cccccc',
         nodeCompletedColor: '#4bb543',
         nodeActiveColor: '#ffa743',
@@ -46,7 +46,7 @@ const progressBar = new ProgressBar({
         {
             id: '5',
             innerText: '4',
-            outerText: 'fourth',
+            outerText: '5',
             parentNode: '1',
             isCompleted: true
         },
@@ -54,53 +54,55 @@ const progressBar = new ProgressBar({
             id: '6',
             innerText: '4',
             isCompleted: true,
-            outerText: 'fourth',
+            outerText: '6',
             parentNode: '1'
         },
         {
             id: '7',
             innerText: '4',
-            outerText: 'fourth',
-            parentNode: '6'
+            outerText: '7',
+            parentNode: '6',
+            isCompleted: true
         },
         {
             id: '8',
             innerText: '4',
-            outerText: 'fourth',
-            parentNode: '6'
+            outerText: '8',
+            parentNode: '6',
+            isCompleted: true
         },
         {
             id: '9',
             innerText: '4',
-            outerText: 'fourth',
+            outerText: '9',
             parentNode: '4',
             isActive: true
         },
         {
             id: '10',
             innerText: '4',
-            outerText: 'fourth',
+            outerText: '10',
             parentNode: '5',
             isCompleted: true
         },
         {
             id: '11',
             innerText: '4',
-            outerText: 'fourth',
-            parentNode: '10',
+            outerText: '11',
+            parentNode: ['10', '7'],
             isCompleted: true
         },
         {
             id: '12',
             innerText: '4',
-            outerText: 'fourth',
-            parentNode: '11',
+            outerText: '12',
+            parentNode: ['11', '8', '3'],
             isFailed: true
         },
         {
             id: '13',
             innerText: '4',
-            outerText: 'fourth',
+            outerText: '13',
             parentNode: '12',
         }
     ]

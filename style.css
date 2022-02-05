@@ -75,6 +75,8 @@ body {
 
 .default-node .node-text {
     z-index: 5;
+    position: absolute;
+    bottom: -15px;
 }
 
 .default-node.active {
@@ -145,7 +147,7 @@ body {
 
 @keyframes appear {
     0%{
-        height: 0px;
+        height: 0;
         opacity: 1;
     }
     100%{

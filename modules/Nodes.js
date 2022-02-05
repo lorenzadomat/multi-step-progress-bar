@@ -55,7 +55,13 @@ export class DefaultNode {
         this.nodeCircleInfo = document.createElement('div');
         //this.nodeCircleInfo.className = 'node-circle-info';
 
-        this.drawConnectingLine();
+        if(this.parentNode instanceof Array){
+            for (let node of this.parentNode){
+                this.drawConnectingLine(node);
+            }
+        }else {
+            this.drawConnectingLine(this.parentNode);
+        }
 
 
         if (this.isActive === true){
@@ -109,35 +115,49 @@ export class DefaultNode {
         this.circle.innerHTML = '';
     }
 
-    drawConnectingLine(){
-        const parentNode = this.progressBar.nodeMap.get(this.parentNode);
+    drawConnectingLine(parentNodeId){
+        const parentNode = this.progressBar.nodeMap.get(parentNodeId);
         if(parentNode) {
             const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             const topDifference = this.position.top - parentNode.position.top;
+            const leftDifference = this.position.left - parentNode.position.left;
             if(topDifference === 0) {
                 svg.style.cssText = `
                     position: absolute;
-                    width: ${this.progressBar.style.nodeDistanceX}px;
+                    width: ${leftDifference}px;
                     height: ${this.progressBar.style.nodeDistanceY}px;
                     top: 20px;
-                    left: ${-this.progressBar.style.nodeDistanceX + 20}px;
+                    left: ${-leftDifference + 20}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
-                    d: `M0,1 L${this.progressBar.style.nodeDistanceX},1`,
+                    d: `M1,1 L${this.progressBar.style.nodeDistanceX},1`,
+                    class: 'dtc-canvas-path'
+                }));
+            }else if(topDifference > 0){
+                svg.style.cssText = `
+                    position: absolute;
+                    width: ${leftDifference}px;
+                    height: ${topDifference + 1}px;
+                    top: ${20 - topDifference}px;
+                    left: ${-leftDifference+ 20}px;
+                `;
+                svg.appendChild(createSVGElement('path', {
+                    d: `M 1 1 L ${leftDifference - this.progressBar.style.nodeDistanceX} 1 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference} ${leftDifference} ${topDifference}`,
                     class: 'dtc-canvas-path'
                 }));
             }else{
                 svg.style.cssText = `
                     position: absolute;
-                    width: ${this.progressBar.style.nodeDistanceX}px;
-                    height: ${topDifference + 100}px;
-                    top: ${20 - topDifference}px;
-                    left: ${-this.progressBar.style.nodeDistanceX + 20}px;
+                    width: ${leftDifference}px;
+                    height: ${Math.abs(topDifference) + 1}px;
+                    top: ${20}px;
+                    left: ${-leftDifference + 20}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
-                    d: `M 0 0 Q ${this.progressBar.style.nodeDistanceX / 2} 0 ${this.progressBar.style.nodeDistanceX / 2} 15 L ${this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} Q ${this.progressBar.style.nodeDistanceX / 2} ${topDifference} ${this.progressBar.style.nodeDistanceX} ${topDifference}`,
+                    d: `M 1 ${Math.abs(topDifference)} L ${leftDifference - this.progressBar.style.nodeDistanceX} ${Math.abs(topDifference)} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference)} ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference) - 15} L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference} 1`,
                     class: 'dtc-canvas-path'
                 }));
+
             }
 
             this.node.appendChild(svg);

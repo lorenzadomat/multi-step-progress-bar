@@ -67,21 +67,21 @@ export default class ProgressBar {
     calculatePosition(nodeDefinition){
         let top = 0;
         let left = 0;
-        if(nodeDefinition.isBeginningNode){
-            const beginningNodeLength = this.beginningNodes.length;
-            top = beginningNodeLength * this.style.nodeDistanceY;
-        }else if(nodeDefinition.parentNode){
-            const parentNode = this.nodeMap.get(nodeDefinition.parentNode);
+        if(nodeDefinition.parentNode){
+            let parentNode;
+            if(nodeDefinition.parentNode instanceof Array){
+                parentNode = this.nodeMap.get(nodeDefinition.parentNode[0]);
+            }else {
+                parentNode = this.nodeMap.get(nodeDefinition.parentNode);
+            }
             if(parentNode){
                 top = parentNode.position.top + (parentNode.childNodes.length * this.style.nodeDistanceY);
                 left = parentNode.position.left + this.style.nodeDistanceX;
                 parentNode.addChildNode(nodeDefinition.id);
-            }else{
-                const beginningNodeLength = this.beginningNodes.length;
-                top = beginningNodeLength * this.style.nodeDistanceY;
-                nodeDefinition.isBeginningNode = true;
             }
-        }else{
+        }
+
+        if(top === 0 && left === 0){
             const beginningNodeLength = this.beginningNodes.length;
             top = beginningNodeLength * this.style.nodeDistanceY;
             nodeDefinition.isBeginningNode = true;

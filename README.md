@@ -1,21 +1,19 @@
 <p align="center" style="font-size: 2em">A javascript library for creating a</p> 
 <p align="center" style="font-size: 2em">Multi Step Progress Bar</p>
-<p align="center">
-    <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-</p>
+
 
 ## Description
 
 The multi-step-progess-bar Library can be easily integrated into every frontend project, to create a progress bar with multiple steps.
 
-Going a step further it is also possible to create sub-processes. 
+Going a step further it is also possible to create simultaneous sub-processes. 
 
-<p>Under the hood, the library works with simple html and svg elements to create the progress bar</p>
+Under the hood, the library works with simple html and svg elements to create the progress bar.
 
 ## Example
 
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="./media/progress-bar-example2.png" width="600" alt="Nest Logo" /></a>
+  <img src="./media/progress-bar-example3.png" alt="" title="Progress Bar Example"/>
 </p>
 
 ## Getting started
@@ -31,7 +29,7 @@ Initialize the progress bar, by adding the following code to your JavaScript Fil
 ```javascript
 import ProgressBar from './modules/ProgressBar.js';
 
-const progressBar = new ProgressBar({
+new ProgressBar({
     parent: document.getElementById('container'),
     style: {},
     initialNodes: [
@@ -85,3 +83,12 @@ The progress bar style can be adapted by using one of the following properties i
 | nodeCompletedColor | Color of a completed node         | ![#4bb543](https://via.placeholder.com/15/4bb543/000000?text=+) ```#4bb543``` | CSS color |
 | nodeActiveColor    | Color of an active node           | ![#ffa743](https://via.placeholder.com/15/ffa743/000000?text=+) ```#ffa743``` | CSS color |
 | nodeFailedColor    | Color of a failed node            | ![#c05555](https://via.placeholder.com/15/c05555/000000?text=+) ```#c05555``` | CSS color |
+
+
+## Ideas & TODOs
+
+- Loading Animation
+- Node Details on Hover/Click
+
+
+For any further ideas pleas write an E-Mail to <a href="mailto:l.adomat@reply.de">l.adomat@reply.de</a> or create a pull request.
