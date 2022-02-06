@@ -138,11 +138,11 @@ export class DefaultNode {
                     position: absolute;
                     width: ${leftDifference}px;
                     height: ${topDifference + 1}px;
-                    top: ${20 - topDifference}px;
+                    top: ${20 - topDifference + 1}px;
                     left: ${-leftDifference+ 20}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
-                    d: `M 1 1 L ${leftDifference - this.progressBar.style.nodeDistanceX} 1 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference} ${leftDifference} ${topDifference}`,
+                    d: `M 1 1 L ${leftDifference - this.progressBar.style.nodeDistanceX + 35} 1 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference} ${leftDifference - 35} ${topDifference} H ${leftDifference}`,
                     class: 'dtc-canvas-path'
                 }));
             }else{
@@ -154,7 +154,7 @@ export class DefaultNode {
                     left: ${-leftDifference + 20}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
-                    d: `M 1 ${Math.abs(topDifference)} L ${leftDifference - this.progressBar.style.nodeDistanceX} ${Math.abs(topDifference)} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference)} ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference) - 15} L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference} 1`,
+                    d: `M 1 ${Math.abs(topDifference)} L ${leftDifference - this.progressBar.style.nodeDistanceX + 35} ${Math.abs(topDifference)} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference)} ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference) - 15} L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference - 35} 1 H ${leftDifference}`,
                     class: 'dtc-canvas-path'
                 }));
 
