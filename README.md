@@ -76,17 +76,18 @@ Sub-Processes are automatically generated when two nodes have the same parent.
 ## Style
 The progress bar style can be adapted by using one of the following properties in the style object
 
-| property           | description                             | default                                                                       | type      | 
-|--------------------|-----------------------------------------|-------------------------------------------------------------------------------|-----------|
-| showOuterText      | Show text outside of the node           | ```false```                                                                   | boolean   |
-| nodeSize           | Size of a node in px                    | ```20```                                                                      | integer   |
-| nodeDistanceX      | Horizontal distance between nodes in px | ```100```                                                                     | integer   |
-| nodeDistanceY      | Vertical distance between nodes in px   | ```100```                                                                     | integer   |
-| nodeColor          | Default Color of a node                 | ![#cccccc](https://via.placeholder.com/15/cccccc/000000?text=+) ```#cccccc``` | CSS color |
-| nodeCompletedColor | Color of a completed node               | ![#4bb543](https://via.placeholder.com/15/4bb543/000000?text=+) ```#4bb543``` | CSS color |
-| nodeActiveColor    | Color of an active node                 | ![#ffa743](https://via.placeholder.com/15/ffa743/000000?text=+) ```#ffa743``` | CSS color |
-| nodeFailedColor    | Color of a failed node                  | ![#c05555](https://via.placeholder.com/15/c05555/000000?text=+) ```#c05555``` | CSS color |
+| property           | description                             | default                                                                       | type             | 
+|--------------------|-----------------------------------------|-------------------------------------------------------------------------------|------------------|
+| showOuterText      | Show text outside of the node           | ```false```                                                                   | boolean          |
+| nodeSize           | Size of a node in px                    | ```20```                                                                      | integer          |
+| nodeDistanceX      | Horizontal distance between nodes in px | ```100```                                                                     | integer          |
+| nodeDistanceY      | Vertical distance between nodes in px   | ```100```                                                                     | integer          |
+| nodeColor          | Default Color of a node                 | ![#cccccc](https://via.placeholder.com/15/cccccc/000000?text=+) ```#cccccc``` | CSS color        |
+| nodeCompletedColor | Color of a completed node               | ![#4bb543](https://via.placeholder.com/15/4bb543/000000?text=+) ```#4bb543``` | CSS color        |
+| nodeActiveColor    | Color of an active node                 | ![#ffa743](https://via.placeholder.com/15/ffa743/000000?text=+) ```#ffa743``` | CSS color        |
+| nodeFailedColor    | Color of a failed node                  | ![#c05555](https://via.placeholder.com/15/c05555/000000?text=+) ```#c05555``` | CSS color        |
 | nodeStyle          | Set different node styles               | 0                                                                             | ```enum(0, 1)``` |
+| animate            | Turn animations on                      | ```false```                                                                   | boolean          |
 
 
 

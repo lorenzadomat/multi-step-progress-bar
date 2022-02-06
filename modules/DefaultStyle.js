@@ -7,5 +7,6 @@ export const DefaultStyle = {
     nodeCompletedColor: '#4bb543',
     nodeActiveColor: '#ffa743',
     nodeFailedColor: '#c05555',
-    nodeStyle: 0
+    nodeStyle: 0,
+    animate: false
 }

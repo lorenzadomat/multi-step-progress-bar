@@ -25,6 +25,7 @@ export class DefaultNode {
         this.isFailed = props.isFailed;
         this.number = props.number || 0;
         this.position = props.position;
+        this.currentColor = this.progressBar.style.nodeColor;
 
         this.childNodes = [];
 
@@ -99,6 +100,7 @@ export class DefaultNode {
     }
 
     updateNodeStyle(color, innerHtml){
+        this.currentColor = color;
         switch (this.progressBar.style.nodeStyle){
             case 0:
                 this.circle.style.backgroundColor = color;
@@ -121,6 +123,9 @@ export class DefaultNode {
 
     setActive(){
         this.updateNodeStyle(this.progressBar.style.nodeActiveColor, '<i class="fas fa-spinner" aria-hidden="true"></i>')
+        if(this.progressBar.style.animate) {
+            this.circle.classList.add('rotate-icon');
+        }
     }
 
     setInactive(){
@@ -144,13 +149,13 @@ export class DefaultNode {
         this.updateNodeStyle(this.progressBar.style.nodeColor, '');
     }
 
-    drawConnectingLine(parentNodeId){
+    getConnectingLine(parentNodeId){
         const parentNode = this.progressBar.nodeMap.get(parentNodeId);
         if(parentNode) {
-            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             const topDifference = this.position.top - parentNode.position.top;
             const leftDifference = this.position.left - parentNode.position.left;
-            if(topDifference === 0) {
+            if (topDifference === 0) {
                 svg.style.cssText = `
                     position: absolute;
                     width: ${leftDifference}px;
@@ -160,9 +165,10 @@ export class DefaultNode {
                 `;
                 svg.appendChild(createSVGElement('path', {
                     d: `M1,1 L${this.progressBar.style.nodeDistanceX},1`,
-                    class: 'dtc-canvas-path'
+                    class: 'dtc-canvas-path',
+                    style: 'stroke: #000000'
                 }));
-            }else if(topDifference > 0){
+            } else if (topDifference > 0) {
                 svg.style.cssText = `
                     position: absolute;
                     width: ${leftDifference}px;
@@ -172,9 +178,10 @@ export class DefaultNode {
                 `;
                 svg.appendChild(createSVGElement('path', {
                     d: `M 1 1 L ${leftDifference - this.progressBar.style.nodeDistanceX + 35} 1 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference} ${leftDifference - 35} ${topDifference} H ${leftDifference}`,
-                    class: 'dtc-canvas-path'
+                    class: 'dtc-canvas-path',
+                    style: 'stroke: #000000'
                 }));
-            }else{
+            } else {
                 svg.style.cssText = `
                     position: absolute;
                     width: ${leftDifference}px;
@@ -184,17 +191,52 @@ export class DefaultNode {
                 `;
                 svg.appendChild(createSVGElement('path', {
                     d: `M 1 ${Math.abs(topDifference)} L ${leftDifference - this.progressBar.style.nodeDistanceX + 35} ${Math.abs(topDifference)} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference)} ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference) - 15} L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference - 35} 1 H ${leftDifference}`,
-                    class: 'dtc-canvas-path'
+                    class: 'dtc-canvas-path',
+                    style: 'stroke: #000000'
                 }));
 
             }
+            return svg;
+        }
+    }
 
-            this.node.appendChild(svg);
+    drawConnectingLine(parentNodeId){
+        const connectingLine = this.getConnectingLine(parentNodeId)
+        if(connectingLine) {
+            this.node.appendChild(connectingLine);
         }
     }
 
     addChildNode(nodeId){
         this.childNodes.push(nodeId);
+    }
+
+
+    triggerAnimation(){
+        if(this.isActive || this.isFailed || this.isCompleted)
+        if(this.parentNode instanceof Array){
+            for(let parentNode of this.parentNode){
+                const animationLine = this.getConnectingLine(parentNode);
+                const animationPath = animationLine.getElementsByTagName('path')[0]
+                const pathLength = animationPath.getTotalLength();
+                animationLine.style.setProperty('--strokeLength', pathLength + 'px');
+                animationLine.style.strokeDasharray = pathLength;
+                animationLine.style.strokeDashoffset = '100%';
+                animationLine.style.animationPlayState = 'running';
+                animationPath.style.stroke = this.currentColor;
+                this.node.appendChild(animationLine);
+            }
+        }else{
+            const animationLine = this.getConnectingLine(this.parentNode);
+            const animationPath = animationLine.getElementsByTagName('path')[0]
+            const pathLength = animationPath.getTotalLength();
+            animationLine.style.setProperty('--strokeLength', pathLength + 'px');
+            animationLine.style.strokeDasharray = pathLength;
+            animationLine.style.strokeDashoffset = '100%';
+            animationLine.style.animationPlayState = 'running';
+            animationPath.style.stroke = this.currentColor;
+            this.node.appendChild(animationLine);
+        }
     }
 
 

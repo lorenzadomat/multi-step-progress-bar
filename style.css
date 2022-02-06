@@ -46,6 +46,10 @@ body {
     margin-bottom: 6px;
 }
 
+.default-node .node-circle.rotate-icon i{
+    animation: rotate 2s linear infinite;
+}
+
 .node-circle .node-style-0 {
     background: #ccc;
 }
@@ -69,6 +73,11 @@ body {
     font-weight: bold;
 }
 
+.default-node svg {
+    animation: completePath var(--animationDuration) ease-out paused;
+    animation-fill-mode: forwards;
+}
+
 @keyframes completedLine {
     0%{
         width: 0;
@@ -83,5 +92,22 @@ body {
 .dtc-canvas-path {
     fill: none;
     stroke-width: 2;
-    stroke: black;
+}
+
+@keyframes completePath {
+    from{
+        stroke-dashoffset: var(--strokeLength);
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes rotate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }

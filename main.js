@@ -12,7 +12,8 @@ new ProgressBar({
         nodeCompletedColor: '#4bb543',
         nodeActiveColor: '#ffa743',
         nodeFailedColor: '#c05556',
-        nodeStyle: 1
+        nodeStyle: 1,
+        animate: false
     },
     initialNodes: [
         {

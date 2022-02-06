@@ -26,7 +26,8 @@ export default class ProgressBar {
         for (let nodeDefinition of this.initialNodes) {
             this.addNode(nodeDefinition);
         }
-
+        this.container.style.setProperty('--animationDuration', this.style.animate ? 1750 + 'ms' : 0 + 'ms')
+        this.runAnimation(this.style.animate ? 1750 : 0);
     }
 
     /**
@@ -57,6 +58,10 @@ export default class ProgressBar {
             this.beginningNodes.push(node)
         }
         this.container.append(node.getNode());
+    }
+
+    getNode(nodeId){
+        return this.nodeMap.get(nodeId);
     }
 
 
@@ -96,4 +101,34 @@ export default class ProgressBar {
             left
         }
     }
+
+    runAnimation(delay){
+        for(let node of this.beginningNodes){
+            this.runAnimationForNode(node, delay);
+        }
+
+    }
+
+    runAnimationForNode(node, delay){
+        let children;
+        if(typeof node === 'string'){
+            children = this.getNode(node).childNodes;
+        }else {
+            children = node.childNodes;
+        }
+        if(children) {
+            for (let childId of children) {
+                const child = this.getNode(childId);
+                child.triggerAnimation();
+                animationDelay(delay).then(() => {
+                    this.runAnimationForNode(childId);
+                })
+            }
+        }
+
+    }
+}
+
+function animationDelay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
 }
