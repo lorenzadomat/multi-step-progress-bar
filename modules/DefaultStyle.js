@@ -1,6 +1,6 @@
 export const DefaultStyle = {
     showOuterText: false,
-    nodeSize: 20,
+    nodeSize: 40,
     nodeDistanceX: 100,
     nodeDistanceY: 100,
     nodeColor: '#cccccc',

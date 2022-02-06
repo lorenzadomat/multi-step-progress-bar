@@ -5,7 +5,7 @@ new ProgressBar({
     parent: document.getElementById('container'),
     style: {
         showOuterText: true,
-        nodeSize: 20,
+        nodeSize: 40,
         nodeDistanceX: 100,
         nodeDistanceY: 100,
         nodeColor: '#cccccc',

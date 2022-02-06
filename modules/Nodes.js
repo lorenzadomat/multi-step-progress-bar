@@ -48,6 +48,10 @@ export class DefaultNode {
                 this.circle.className = 'node-circle node-filled-ß';
                 break;
         }
+
+        this.circle.style.width = this.progressBar.style.nodeSize + 'px';
+        this.circle.style.height = this.progressBar.style.nodeSize + 'px';
+
         if(this.isCompleted){
             this.circle.style.backgroundColor = this.progressBar.style.nodeCompletedColor
         }else if(this.isActive){
@@ -151,7 +155,7 @@ export class DefaultNode {
                     position: absolute;
                     width: ${leftDifference}px;
                     height: ${this.progressBar.style.nodeDistanceY}px;
-                    top: 20px;
+                    top: ${this.progressBar.style.nodeSize / 2}px;
                     left: ${-leftDifference + 20}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
@@ -163,8 +167,8 @@ export class DefaultNode {
                     position: absolute;
                     width: ${leftDifference}px;
                     height: ${topDifference + 1}px;
-                    top: ${20 - topDifference + 1}px;
-                    left: ${-leftDifference+ 20}px;
+                    top: ${this.progressBar.style.nodeSize / 2 - topDifference + 1}px;
+                    left: ${-leftDifference + this.progressBar.style.nodeSize / 2}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
                     d: `M 1 1 L ${leftDifference - this.progressBar.style.nodeDistanceX + 35} 1 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference - 15} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${topDifference} ${leftDifference - 35} ${topDifference} H ${leftDifference}`,
@@ -175,8 +179,8 @@ export class DefaultNode {
                     position: absolute;
                     width: ${leftDifference}px;
                     height: ${Math.abs(topDifference) + 1}px;
-                    top: ${20}px;
-                    left: ${-leftDifference + 20}px;
+                    top: ${this.progressBar.style.nodeSize / 2}px;
+                    left: ${-leftDifference + this.progressBar.style.nodeSize / 2}px;
                 `;
                 svg.appendChild(createSVGElement('path', {
                     d: `M 1 ${Math.abs(topDifference)} L ${leftDifference - this.progressBar.style.nodeDistanceX + 35} ${Math.abs(topDifference)} Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference)} ${leftDifference - this.progressBar.style.nodeDistanceX / 2} ${Math.abs(topDifference) - 15} L ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 15 Q ${leftDifference - this.progressBar.style.nodeDistanceX / 2} 1 ${leftDifference - 35} 1 H ${leftDifference}`,
