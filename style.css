@@ -36,26 +36,6 @@ body {
     flex: 1;
 }
 
-/*.default-node::before {
-    position: absolute;
-    content: "";
-    border-bottom: 2px solid #ccc;
-    width: 100%;
-    top: 20px;
-    left: -50%;
-    z-index: 2;
-}
-
-.default-node::after {
-    position: absolute;
-    content: "";
-    border-bottom: 2px solid #ccc;
-    width: 100%;
-    top: 20px;
-    left: 50%;
-    z-index: 2;
-}*/
-
 .default-node .node-circle {
     position: relative;
     z-index: 5;
@@ -65,8 +45,16 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #ccc;
     margin-bottom: 6px;
+}
+
+.node-circle .node-style-0 {
+    background: #ccc;
+}
+
+.node-circle .node-style-1 {
+    background: #ffffff;
+    border: 2px solid #ccc;
 }
 
 .default-node .node-circle i {
@@ -81,79 +69,6 @@ body {
 
 .default-node.active {
     font-weight: bold;
-}
-
-/*.default-node.completed::after {
-    animation: completedLine 1s ease-in-out;
-    -webkit-animation: completedLine 1s ease-in-out;
-    animation-delay: calc(1s * var(--i));
-    animation-fill-mode: forwards;
-    position: absolute;
-    content: "";
-    border-bottom: 2px solid #ccc;
-    width: 100%;
-    top: 20px;
-    left: 50%;
-    z-index: 3;
-}
-
-.default-node:first-child::before {
-    content: none;
-}
-.default-node:last-child::after {
-    content: none;
-}*/
-
-.default-node .node-circle-info {
-    display: none;
-    position: absolute;
-    width: 80px;
-    height: 130px;
-    background-color: #f1f1f1;
-    left: -20px;
-    top: 40px;
-    opacity: 0;
-}
-
-.default-node .node-circle-info::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    width: 40px;
-    height: 40px;
-    border-radius: 100% 0 0 0;
-    background-color: #4bb543;
-    z-index: 1;
-}
-
-.default-node .node-circle-info::after {
-    content: '';
-    position: absolute;
-    top: -40px;
-    width: 40px;
-    height: 40px;
-    right: 0;
-    border-radius: 0 100% 0 0;
-    background-color: #4bb543;
-    z-index: 1;
-}
-
-.default-node:hover .node-circle-info {
-    display: block;
-    animation: appear 0.7s ease-out;
-    animation-fill-mode: forwards;
-
-}
-
-@keyframes appear {
-    0%{
-        height: 0;
-        opacity: 1;
-    }
-    100%{
-        height: 130px;
-        opacity: 1;
-    }
 }
 
 @keyframes completedLine {

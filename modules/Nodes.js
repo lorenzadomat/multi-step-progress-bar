@@ -37,7 +37,17 @@ export class DefaultNode {
         `
 
         this.circle = document.createElement('div');
-        this.circle.className = 'node-circle';
+        switch (this.progressBar.style.nodeStyle){
+            case 0:
+                this.circle.className = 'node-circle node-style-0';
+                break;
+            case 1:
+                this.circle.className = 'node-circle node-style-1';
+                break;
+            default:
+                this.circle.className = 'node-circle node-filled-ß';
+                break;
+        }
         if(this.isCompleted){
             this.circle.style.backgroundColor = this.progressBar.style.nodeCompletedColor
         }else if(this.isActive){
@@ -84,35 +94,50 @@ export class DefaultNode {
         return this.node;
     }
 
+    updateNodeStyle(color, innerHtml){
+        switch (this.progressBar.style.nodeStyle){
+            case 0:
+                this.circle.style.backgroundColor = color;
+                this.circle.style.border = `2px solid ${color}`;
+                this.circle.style.color = '#000000';
+                break;
+            case 1:
+                this.circle.style.backgroundColor = '#ffffff';
+                this.circle.style.border = `2px solid ${color}`;
+                this.circle.style.color = color;
+                break;
+            default:
+                this.circle.style.backgroundColor = color;
+                this.circle.style.border = `2px solid ${color}`;
+                this.circle.style.color = '#000000';
+                break;
+        }
+        this.circle.innerHTML = innerHtml;
+    }
+
     setActive(){
-        this.circle.style.backgroundColor = this.progressBar.style.nodeActiveColor;
-        this.circle.innerHTML = '<i class="fa fa-clock" aria-hidden="true"></i>';
+        this.updateNodeStyle(this.progressBar.style.nodeActiveColor, '<i class="fa fa-clock" aria-hidden="true"></i>')
     }
 
     setInactive(){
-        this.circle.style.backgroundColor = this.progressBar.style.nodeColor;
-        this.circle.innerHTML = '';
+        this.updateNodeStyle(this.progressBar.style.nodeColor, '');
 
     }
 
     setCompleted(){
-        this.circle.style.backgroundColor = this.progressBar.style.nodeCompletedColor;
-        this.circle.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
+        this.updateNodeStyle(this.progressBar.style.nodeCompletedColor, '<i class="fa fa-check" aria-hidden="true"></i>');
     }
 
     setInCompleted(){
-        this.circle.style.backgroundColor = this.progressBar.style.nodeColor;
-        this.circle.innerHTML = '';
+        this.updateNodeStyle(this.progressBar.style.nodeColor, '');
     }
 
     setFailed(){
-        this.circle.style.backgroundColor = this.progressBar.style.nodeFailedColor;
-        this.circle.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+        this.updateNodeStyle(this.progressBar.style.nodeFailedColor, '<i class="fa fa-times" aria-hidden="true"></i>');
     }
 
     setUnfailed(){
-        this.circle.style.backgroundColor = this.progressBar.style.nodeColor;
-        this.circle.innerHTML = '';
+        this.updateNodeStyle(this.progressBar.style.nodeColor, '');
     }
 
     drawConnectingLine(parentNodeId){

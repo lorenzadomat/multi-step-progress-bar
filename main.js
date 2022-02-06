@@ -11,20 +11,21 @@ new ProgressBar({
         nodeColor: '#cccccc',
         nodeCompletedColor: '#4bb543',
         nodeActiveColor: '#ffa743',
-        nodeFailedColor: '#c05556'
+        nodeFailedColor: '#c05556',
+        nodeStyle: 1
     },
     initialNodes: [
         {
             id: '1',
             innerText: '1',
-            outerText: 'first',
+            outerText: '1',
             isCompleted: true,
             isBeginningNode: true
         },
         {
             id: '2',
             innerText: '2',
-            outerText: 'second',
+            outerText: '2',
             isCompleted: true,
             isBeginningNode: false,
             parentNode: '1'
@@ -32,14 +33,14 @@ new ProgressBar({
         {
             id: '3',
             innerText: '3',
-            outerText: 'third',
+            outerText: '3',
             isCompleted: true,
             parentNode: '2'
         },
         {
             id: '4',
             innerText: '4',
-            outerText: 'fourth',
+            outerText: '4',
             parentNode: '1',
             isCompleted: true
         },
