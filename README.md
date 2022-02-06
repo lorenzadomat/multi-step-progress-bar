@@ -13,7 +13,7 @@ Under the hood, the library works with simple html and svg elements to create th
 ## Example
 
 <p align="center">
-  <img src="./media/progress-bar-example3.png" alt="" title="Progress Bar Example"/>
+  <img src="./media/progress-bar-example4.png" alt="" title="Progress Bar Example"/>
 </p>
 
 ## Getting started
