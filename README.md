@@ -55,16 +55,19 @@ new ProgressBar({
 ## Node Properties
 A node can be initialized with the following properties.
 
-| property    | description              | example    | type    | 
-|-------------|--------------------------|------------|---------|
-| id          | Unique ID of the node    | ```1```    | string  |
-| innerText   | Text inside of the node  | some text  | string  |
-| outerText   | Text outside of the node | some text  | string  |
-| parentNode  | ID of the parent node    | ```1```    | string  |
-| isActive    | Set node to active       | ```true``` | boolean |
-| isCompleted | Set node to completed    | ```true``` | boolean |
-| isFailed    | Set node to failed       | ```true``` | boolean |
-| number      | Number of a node         | ```1```    | integer |
+| property        | description                                   | example    | type    | 
+|-----------------|-----------------------------------------------|------------|---------|
+| id              | Unique ID of the node                         | ```1```    | string  |
+| innerText       | Text inside of the node                       | some text  | string  |
+| outerText       | Text outside of the node                      | some text  | string  |
+| parentNode      | ID of the parent node                         | ```1```    | string  |
+| isActive        | Set node to active                            | ```true``` | boolean |
+| isCompleted     | Set node to completed                         | ```true``` | boolean |
+| isFailed        | Set node to failed                            | ```true``` | boolean |
+| number          | Number of a node                              | ```1```    | integer |
+| isBeginningNode | If the node should be a start node            | ```true``` | boolean |
+| rowNumber       | The rowNumber can set the row of a start node | ```4```    | integer |
+
 
 ## Sub-Processes
 

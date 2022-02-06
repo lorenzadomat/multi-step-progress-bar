@@ -105,6 +105,19 @@ new ProgressBar({
             innerText: '4',
             outerText: '13',
             parentNode: '12',
+        },
+        {
+            id: '14',
+            innerText: '14',
+            outerText: '14',
+            isBeginningNode: true,
+            rowNumber: 5
+        },
+        {
+            id: '15',
+            innerText: '15',
+            outerText: '15',
+            parentNode: '14'
         }
     ]
 });

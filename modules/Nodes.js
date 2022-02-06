@@ -120,7 +120,7 @@ export class DefaultNode {
     }
 
     setActive(){
-        this.updateNodeStyle(this.progressBar.style.nodeActiveColor, '<i class="fa fa-clock" aria-hidden="true"></i>')
+        this.updateNodeStyle(this.progressBar.style.nodeActiveColor, '<i class="fas fa-spinner" aria-hidden="true"></i>')
     }
 
     setInactive(){

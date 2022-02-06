@@ -5,7 +5,7 @@ import { DefaultStyle } from "./DefaultStyle.js";
 export default class ProgressBar {
 
     /**
-     * @param {{parent: Element, style: object, initialNodes: {innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, number: number}[]}} props
+     * @param {{parent: Element, style: object, initialNodes: {id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, isFailed: boolean, number: number, isBeginningNode: true, parentNode: string, rowNumber: number}[]}} props
      */
     constructor(props) {
 
@@ -31,7 +31,7 @@ export default class ProgressBar {
 
     /**
      *
-     * @param {{id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, isFailed: boolean, number: number, isBeginningNode: boolean, parentNode: string}} nodeDefinition
+     * @param {{id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, isFailed: boolean, number: number, isBeginningNode: boolean, parentNode: string, rowNumber: number}} nodeDefinition
      */
     addNode(nodeDefinition){
         const {top, left} = this.calculatePosition(nodeDefinition)
@@ -62,7 +62,7 @@ export default class ProgressBar {
 
     /**
      *
-     * @param {{id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, number: number, isBeginningNode: boolean, parentNode: string}} nodeDefinition
+     * @param {{id: string, innerText: string, outerText: string, isActive: boolean, isCompleted: boolean, number: number, isBeginningNode: boolean, parentNode: string, rowNumber: number}} nodeDefinition
      */
     calculatePosition(nodeDefinition){
         let top = 0;
@@ -79,6 +79,10 @@ export default class ProgressBar {
                 left = parentNode.position.left + this.style.nodeDistanceX;
                 parentNode.addChildNode(nodeDefinition.id);
             }
+        }
+
+        if(nodeDefinition.isBeginningNode && nodeDefinition.rowNumber){
+            top = nodeDefinition.rowNumber * this.style.nodeDistanceY;
         }
 
         if(top === 0 && left === 0){
